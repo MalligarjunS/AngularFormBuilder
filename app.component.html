@@ -1,0 +1,89 @@
+<div>
+<h2>Online course registration form</h2>
+<small class="text-danger">* -mandatory fields</small>
+<form #regiForm="ngForm">
+
+    {{regiForm.value |json}}
+    <div class="form-group">
+        <label>First Name *:</label>
+        <input type="text" [class.is-invalid]="fname.invalid && fname.touched" class="form-control" name="firstName" [ngModel]="regiForm.firstname">
+        <div *ngIf="fname.invalid && firstName.touched">
+            <small *ngIf="fname.errors?.required" class="text-danger">Field is required</small>     
+            <small *ngIf="fname.errors?.minlength" class="text-danger">Field should be atleast 3 characters</small>     
+    </div>       
+        
+    </div>
+        <div class="form-group">
+            <label>Last Name *:</label>
+            <input type="text" [class.is-invalid]="lname.invalid || lname.touched" class="form-control" name="lastName" [ngModel]="regiForm.ladtname">
+        <div *ngIf="lname.invalid && lastName.touched">
+         <small *ngIf="lname.errors?.required">Last name is required</small>
+         <small *ngIf="lname.error?.minlength">Last name must be atleast 3 characters</small>
+        </div>    
+        
+        </div>
+            <div class="form-group">
+            <label>Password *:</label>
+            <input type="Password" class="form-control" name="password" [ngModel]="regiForm.password">
+        <div *ngIf="pwd.invalid && pwd.touched">
+            <div *ngIf="pwd.errors?.required">Password is required</div>
+            <div *ngIf="pwd.errors?.pattern">Enter a strong password(should contain atleast 1 lowercase alphabetical character,1 uppercase alphabetical character,1 numeric character, 1 special character and must be eight characters or longer)</div>
+        </div>    
+        </div>
+            <div class="form-group">
+            <label>Confirm password *:</label>
+            <input type="Password" [class.is-invalid]="confirmpwd.errors?.mismatch" class="form-control" name="confirmPassword" [ngModel]="regiForm.confirmPassword">
+            <small *ngIf="confirmPassword.invalid && confirmPassword.touched">password doesnot match</small>
+        </div>
+            <div class="form-group">
+                <label>Gender * :</label>
+                <input type="radio" name="gender" value="male">Male
+                <input type="radio" name="gender" value="female">Female
+            </div>
+            <div class="form-group">
+            <select class="custom-select">
+            <option selected>Area of intrest *</option> 
+            <option *ngFor="let topic of topics" name="areaOfIntrest"  [ngModel]="regiForm.areaOfIntrest">{{topic}}</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+            <label>Email ID *: </label>
+            <input type="email" class="form-control" name="email" [ngModel]="regiForm.email">
+            <div *ngIf="email.invalid && email.touched">
+                <div *ngIf="email.errors?.required">Password is required</div>
+                <div *ngIf="email.errors?.pattern">Enter a Valid email id</div>
+            </div>    
+                
+        </div>
+            <div class="form-group">
+            <label>Phone * :</label>
+            <input type="tel" class="form-control" name="phone" [ngModel]="regiForm.phone">
+            <div *ngIf="phone.invalid && phone.touched">
+                <div *ngIf="phone.errors?.required">Password is required</div>
+                <div *ngIf="phone.errors?.pattern">Enter a Valid phone number</div>
+            </div>    
+                    
+        </div>
+            <div ngModelGroup="address">
+            <div class="form-group">
+            <label>City  :</label>
+            <input type="text" class="form-control" name="city" [ngModel]="regiForm.city">
+            </div>
+            <div class="form-group">
+            <label>State  :</label>
+            <input type="text" class="form-control" name="state" [ngModel]="regiForm.state">
+            </div>
+            <div class="form-group">
+            <label>Pincode * :</label>
+            <input type="tel" class="form-control" name="pincode" [ngModel]="regiForm.pincode">
+            <div *ngIf="pincode.invalid && email.touched">
+                <div *ngIf="pincode.errors?.required">Password is required</div>
+                <div *ngIf="pincode.errors?.pattern">Enter a Valid pincode</div>
+            </div>    
+                    
+        </div>
+        </div>
+        </form>
+<button class="btn btn-success">Submit</button>
+</div>
